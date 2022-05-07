@@ -10,7 +10,6 @@ public class NewJFrame extends javax.swing.JFrame
 {
 
     static Connection con;
-    String nm;
 
     ResultSet result;
     PreparedStatement pst;
