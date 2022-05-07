@@ -10,6 +10,7 @@ public class NewJFrame extends javax.swing.JFrame
 {
 
     static Connection con;
+    String nm;
 
     ResultSet result;
     PreparedStatement pst;
@@ -17,7 +18,7 @@ public class NewJFrame extends javax.swing.JFrame
 
     public NewJFrame()
     {
-	initComponents();
+        initComponents();
     }
 
     @SuppressWarnings("unchecked")
@@ -244,404 +245,404 @@ public class NewJFrame extends javax.swing.JFrame
 
     private void btnInsrtActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnInsrtActionPerformed
     {//GEN-HEADEREND:event_btnInsrtActionPerformed
-	if (isIdEmpty())
+        if (isIdEmpty())
 
-	{
-	    JOptionPane.showMessageDialog(null, "ID Field is Empty!");
-	    txtId.grabFocus();
-	}
-	else if (isIdExist())
-	{
-	    JOptionPane.showMessageDialog(null, "ID Already Exist", "INVALID CREDENTIALS", JOptionPane.INFORMATION_MESSAGE);
-	    txtId.grabFocus();
-	    txtId.selectAll();
+        {
+            JOptionPane.showMessageDialog(null, "ID Field is Empty!");
+            txtId.grabFocus();
+        }
+        else if (isIdExist())
+        {
+            JOptionPane.showMessageDialog(null, "ID Already Exist", "INVALID CREDENTIALS", JOptionPane.INFORMATION_MESSAGE);
+            txtId.grabFocus();
+            txtId.selectAll();
 
-	}
+        }
 
-	else if (isNameEmpty())
-	{
-	    JOptionPane.showMessageDialog(null, "Name Field is Empty!");
-	    txtNm.grabFocus();
-	}
-	else if (isCityEmpty())
-	{
-	    JOptionPane.showMessageDialog(null, "City Field is Empty!");
-	    txtCity.grabFocus();
-	}
-	else if (isDesignationEmpty())
-	{
-	    JOptionPane.showMessageDialog(null, "Designation Field is Empty!");
-	    txtDesig.grabFocus();
-	}
-	else
-	{
-	    try
-	    {
-		String query = "insert into crud values(?, ?, ?, ?)";
-		pst = con.prepareStatement(query);
-		pst.setInt(1, Integer.parseInt(txtId.getText()));
-		pst.setString(2, txtNm.getText());
-		pst.setString(3, txtCity.getText());
-		pst.setString(4, txtDesig.getText());
+        else if (isNameEmpty())
+        {
+            JOptionPane.showMessageDialog(null, "Name Field is Empty!");
+            txtNm.grabFocus();
+        }
+        else if (isCityEmpty())
+        {
+            JOptionPane.showMessageDialog(null, "City Field is Empty!");
+            txtCity.grabFocus();
+        }
+        else if (isDesignationEmpty())
+        {
+            JOptionPane.showMessageDialog(null, "Designation Field is Empty!");
+            txtDesig.grabFocus();
+        }
+        else
+        {
+            try
+            {
+                String query = "insert into crud values(?, ?, ?, ?)";
+                pst = con.prepareStatement(query);
+                pst.setInt(1, Integer.parseInt(txtId.getText()));
+                pst.setString(2, txtNm.getText());
+                pst.setString(3, txtCity.getText());
+                pst.setString(4, txtDesig.getText());
 
-		int r = pst.executeUpdate();
-		if (r > 0)
-		{
-		    JOptionPane.showMessageDialog(null, "1 Record Inserted Successfully!");
-		    clearFields();
-		    txtNm.grabFocus();
-		}
+                int r = pst.executeUpdate();
+                if (r > 0)
+                {
+                    JOptionPane.showMessageDialog(null, "1 Record Inserted Successfully!");
+                    clearFields();
+                    txtNm.grabFocus();
+                }
 
-	    }
-	    catch (SQLException e)
-	    {
-		JOptionPane.showMessageDialog(null, e.getMessage());
-	    }
-	}
+            }
+            catch (SQLException e)
+            {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
+        }
 
-	bindData();
-	autoGenerateId();
+        bindData();
+        autoGenerateId();
     }//GEN-LAST:event_btnInsrtActionPerformed
 
     private void btnUpdtActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnUpdtActionPerformed
     {//GEN-HEADEREND:event_btnUpdtActionPerformed
-	if (isIdEmpty())
-	{
-	    JOptionPane.showMessageDialog(null, "ID Field is Empty!");
-	    txtId.grabFocus();
-	}
-	else if (!isIdExist())
-	{
-	    JOptionPane.showMessageDialog(null, "ID does not Exist", "INVALID CREDENTIALS", JOptionPane.INFORMATION_MESSAGE);
-	    txtId.grabFocus();
-	    txtId.selectAll();
-	}
-	else
-	{
-	    try
-	    {
-		String query = "update crud set nm = ?, city = ?, desig = ? where id = ?";
-		pst = con.prepareStatement(query);
-		pst.setString(1, txtNm.getText());
-		pst.setString(2, txtCity.getText());
-		pst.setString(3, txtDesig.getText());
-		pst.setString(4, txtId.getText());
+        if (isIdEmpty())
+        {
+            JOptionPane.showMessageDialog(null, "ID Field is Empty!");
+            txtId.grabFocus();
+        }
+        else if (!isIdExist())
+        {
+            JOptionPane.showMessageDialog(null, "ID does not Exist", "INVALID CREDENTIALS", JOptionPane.INFORMATION_MESSAGE);
+            txtId.grabFocus();
+            txtId.selectAll();
+        }
+        else
+        {
+            try
+            {
+                String query = "update crud set nm = ?, city = ?, desig = ? where id = ?";
+                pst = con.prepareStatement(query);
+                pst.setString(1, txtNm.getText());
+                pst.setString(2, txtCity.getText());
+                pst.setString(3, txtDesig.getText());
+                pst.setString(4, txtId.getText());
 
-		int r = pst.executeUpdate();
-		if (r > 0)
-		{
-		    JOptionPane.showMessageDialog(null, "1 Record Updated Successfully!");
-		    bindData();
-		    autoGenerateId();
-		}
-	    }
-	    catch (Exception e)
-	    {
-		JOptionPane.showMessageDialog(null, e.getMessage());
-		System.exit(0);
-	    }
-	}
+                int r = pst.executeUpdate();
+                if (r > 0)
+                {
+                    JOptionPane.showMessageDialog(null, "1 Record Updated Successfully!");
+                    bindData();
+                    autoGenerateId();
+                }
+            }
+            catch (Exception e)
+            {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+                System.exit(0);
+            }
+        }
 
     }//GEN-LAST:event_btnUpdtActionPerformed
 
     private void btnDltActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnDltActionPerformed
     {//GEN-HEADEREND:event_btnDltActionPerformed
-	if (isIdEmpty())
-	{
-	    JOptionPane.showMessageDialog(null, "ID Field is Empty!");
-	    txtId.grabFocus();
-	}
-	else if (!isIdExist())
-	{
-	    JOptionPane.showMessageDialog(null, "ID does not Exist", "INVALID CREDENTIALS", JOptionPane.INFORMATION_MESSAGE);
-	    txtId.grabFocus();
-	    txtId.selectAll();
-	}
-	else
-	{
-	    try
-	    {
-		String query = "delete from crud where id = ?";
-		pst = con.prepareStatement(query);
-		pst.setString(1, txtId.getText());
+        if (isIdEmpty())
+        {
+            JOptionPane.showMessageDialog(null, "ID Field is Empty!");
+            txtId.grabFocus();
+        }
+        else if (!isIdExist())
+        {
+            JOptionPane.showMessageDialog(null, "ID does not Exist", "INVALID CREDENTIALS", JOptionPane.INFORMATION_MESSAGE);
+            txtId.grabFocus();
+            txtId.selectAll();
+        }
+        else
+        {
+            try
+            {
+                String query = "delete from crud where id = ?";
+                pst = con.prepareStatement(query);
+                pst.setString(1, txtId.getText());
 
-		int r = pst.executeUpdate();
-		if (r > 0)
-		{
-		    JOptionPane.showMessageDialog(null, "1 Record Deleted Successfully!");
-		}
-	    }
-	    catch (Exception e)
-	    {
-		JOptionPane.showMessageDialog(null, e.getMessage());
-	    }
-	}
+                int r = pst.executeUpdate();
+                if (r > 0)
+                {
+                    JOptionPane.showMessageDialog(null, "1 Record Deleted Successfully!");
+                }
+            }
+            catch (Exception e)
+            {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
+        }
 
-	bindData();
+        bindData();
     }//GEN-LAST:event_btnDltActionPerformed
 
     private void btnRetrieveActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnRetrieveActionPerformed
     {//GEN-HEADEREND:event_btnRetrieveActionPerformed
-	if (isIdEmpty())
-	{
-	    JOptionPane.showMessageDialog(null, "ID Field is Empty!");
-	    txtId.grabFocus();
-	}
-	else if (!isIdExist())
-	{
-	    JOptionPane.showMessageDialog(null, "ID does not Exist", "INVALID CREDENTIALS", JOptionPane.INFORMATION_MESSAGE);
-	    txtId.grabFocus();
-	    txtId.selectAll();
-	}
-	else
-	{
-	    String query = "select * from crud where id = '" + txtId.getText() + "'";
-	    try
-	    {
-		st = con.createStatement();
-		result = st.executeQuery(query);
-		if (result.next())
-		{
-		    txtId.setText(result.getString(1));
-		    txtNm.setText(result.getString(2));
-		    txtCity.setText(result.getString(3));
-		    txtDesig.setText(result.getString(4));
-		    autoGenerateId();
-		}
-		else
-		{
-		    JOptionPane.showMessageDialog(null, "ID does not Exist", "INVALID CREDENTIALS", JOptionPane.INFORMATION_MESSAGE);
-		}
-	    }
-	    catch (Exception e)
-	    {
-		JOptionPane.showMessageDialog(null, e.getMessage());
-		System.exit(0);
-	    }
-	}
+        if (isIdEmpty())
+        {
+            JOptionPane.showMessageDialog(null, "ID Field is Empty!");
+            txtId.grabFocus();
+        }
+        else if (!isIdExist())
+        {
+            JOptionPane.showMessageDialog(null, "ID does not Exist", "INVALID CREDENTIALS", JOptionPane.INFORMATION_MESSAGE);
+            txtId.grabFocus();
+            txtId.selectAll();
+        }
+        else
+        {
+            String query = "select * from crud where id = '" + txtId.getText() + "'";
+            try
+            {
+                st = con.createStatement();
+                result = st.executeQuery(query);
+                if (result.next())
+                {
+                    txtId.setText(result.getString(1));
+                    txtNm.setText(result.getString(2));
+                    txtCity.setText(result.getString(3));
+                    txtDesig.setText(result.getString(4));
+                    autoGenerateId();
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "ID does not Exist", "INVALID CREDENTIALS", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+            catch (Exception e)
+            {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+                System.exit(0);
+            }
+        }
     }//GEN-LAST:event_btnRetrieveActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowOpened
     {//GEN-HEADEREND:event_formWindowOpened
-	bindData();
-	autoGenerateId();
+        bindData();
+        autoGenerateId();
     }//GEN-LAST:event_formWindowOpened
 
     private void JTableMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_JTableMouseClicked
     {//GEN-HEADEREND:event_JTableMouseClicked
-	DefaultTableModel model = (DefaultTableModel) JTable.getModel();
-	int rowIndex = JTable.getSelectedRow();
-	txtId.setText(model.getValueAt(rowIndex, 0).toString());
-	txtNm.setText(model.getValueAt(rowIndex, 1).toString());
-	txtCity.setText(model.getValueAt(rowIndex, 2).toString());
-	txtDesig.setText(model.getValueAt(rowIndex, 3).toString());
+        DefaultTableModel model = (DefaultTableModel) JTable.getModel();
+        int rowIndex = JTable.getSelectedRow();
+        txtId.setText(model.getValueAt(rowIndex, 0).toString());
+        txtNm.setText(model.getValueAt(rowIndex, 1).toString());
+        txtCity.setText(model.getValueAt(rowIndex, 2).toString());
+        txtDesig.setText(model.getValueAt(rowIndex, 3).toString());
 
     }//GEN-LAST:event_JTableMouseClicked
 
     private void txtIdMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_txtIdMouseClicked
     {//GEN-HEADEREND:event_txtIdMouseClicked
-	clearFields();
-	autoGenerateId();
+        clearFields();
+        autoGenerateId();
     }//GEN-LAST:event_txtIdMouseClicked
 
     public static void main(String args[])
     {
 
-	if (isDriverLoaded() == false)
-	{
-	    JOptionPane.showMessageDialog(null, "Failed to Load MySql Driver.", "UNABLE TO LOAD DRIVER!", JOptionPane.INFORMATION_MESSAGE);
-	    System.exit(0);
-	}
-	else if (isConnected() == false)
-	{
-	    JOptionPane.showMessageDialog(null, "Failed to Establish Connection.", "DATABASE CONNECTION FAILED", JOptionPane.INFORMATION_MESSAGE);
-	    System.exit(0);
-	}
-	else
-	{
-	    try
-	    {
-		UIManager.setLookAndFeel(new FlatSolarizedDarkIJTheme());
-	    }
-	    catch (UnsupportedLookAndFeelException ex)
-	    {
-		System.out.println(ex);
-	    }
-	}
+        if (isDriverLoaded() == false)
+        {
+            JOptionPane.showMessageDialog(null, "Failed to Load MySql Driver.", "UNABLE TO LOAD DRIVER!", JOptionPane.INFORMATION_MESSAGE);
+            System.exit(0);
+        }
+        else if (isConnected() == false)
+        {
+            JOptionPane.showMessageDialog(null, "Failed to Establish Connection.", "DATABASE CONNECTION FAILED", JOptionPane.INFORMATION_MESSAGE);
+            System.exit(0);
+        }
+        else
+        {
+            try
+            {
+                UIManager.setLookAndFeel(new FlatSolarizedDarkIJTheme());
+            }
+            catch (UnsupportedLookAndFeelException ex)
+            {
+                System.out.println(ex);
+            }
+        }
 
-	java.awt.EventQueue.invokeLater(new Runnable()
-	{
-	    public void run()
-	    {
-		new NewJFrame().setVisible(true);
-	    }
-	});
+        java.awt.EventQueue.invokeLater(new Runnable()
+        {
+            public void run()
+            {
+                new NewJFrame().setVisible(true);
+            }
+        });
     }
 
     // Custom Methods....
     static boolean isConnected()
     {
-	try
-	{
-	    con = DriverManager.getConnection("jdbc:mysql://localhost:3306/nedjdbc", "root", "");
-	    return true;
-	}
-	catch (Exception e)
-	{
-	    return false;
-	}
+        try
+        {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/nedjdbc", "root", "");
+            return true;
+        }
+        catch (Exception e)
+        {
+            return false;
+        }
     }
 
     static boolean isDriverLoaded()
     {
-	try
-	{
-	    Class.forName(
-		    "com.mysql.jdbc.Driver");
-	    return true;
-	}
-	catch (Exception e)
-	{
-	    return false;
-	}
+        try
+        {
+            Class.forName(
+                    "com.mysql.jdbc.Driver");
+            return true;
+        }
+        catch (Exception e)
+        {
+            return false;
+        }
     }
 
     boolean isIdEmpty()
     {
-	if (txtId.getText().equals(""))
-	{
-	    return true;
-	}
-	else
-	{
-	    return false;
-	}
+        if (txtId.getText().equals(""))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     boolean isNameEmpty()
     {
-	if (txtNm.getText().equals(""))
-	{
-	    return true;
-	}
-	else
-	{
-	    return false;
-	}
+        if (txtNm.getText().equals(""))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     boolean isCityEmpty()
     {
-	if (txtCity.getText().equals(""))
-	{
-	    return true;
-	}
-	else
-	{
-	    return false;
-	}
+        if (txtCity.getText().equals(""))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     boolean isDesignationEmpty()
     {
-	if (txtDesig.getText().equals(""))
-	{
-	    return true;
-	}
-	else
-	{
-	    return false;
-	}
+        if (txtDesig.getText().equals(""))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     void clearFields()
     {
-	txtId.setText("");
-	txtNm.setText("");
-	txtCity.setText("");
-	txtDesig.setText("");
+        txtId.setText("");
+        txtNm.setText("");
+        txtCity.setText("");
+        txtDesig.setText("");
     }
 
     boolean isIdExist()
     {
-	String query = "select * from crud where id = '" + txtId.getText() + "'";
-	try
-	{
-	    st = con.createStatement();
-	    result = st.executeQuery(query);
-	    if (result.next())
-	    {
-		return true;
-	    }
-	    else
-	    {
-		return false;
-	    }
-	}
-	catch (Exception e)
-	{
-	    return false;
-	}
+        String query = "select * from crud where id = '" + txtId.getText() + "'";
+        try
+        {
+            st = con.createStatement();
+            result = st.executeQuery(query);
+            if (result.next())
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        catch (Exception e)
+        {
+            return false;
+        }
 
     }
 
     void bindData()
     {
-	try
-	{
-	    String id, nm, city, desig;
-	    String query = "select * from crud";
+        try
+        {
+            String id, nm, city, desig;
+            String query = "select * from crud";
 
-	    pst = con.prepareStatement(query);
-	    result = pst.executeQuery();
+            pst = con.prepareStatement(query);
+            result = pst.executeQuery();
 
-	    DefaultTableModel table = (DefaultTableModel) JTable.getModel();
-	    table.setRowCount(0);
+            DefaultTableModel table = (DefaultTableModel) JTable.getModel();
+            table.setRowCount(0);
 
-	    while (result.next())
-	    {
-		id = result.getString(1);
-		nm = result.getString(2);
-		city = result.getString(3);
-		desig = result.getString(4);
+            while (result.next())
+            {
+                id = result.getString(1);
+                nm = result.getString(2);
+                city = result.getString(3);
+                desig = result.getString(4);
 
-		String[] rows =
-		{
-		    id, nm, city, desig
-		};
+                String[] rows =
+                {
+                    id, nm, city, desig
+                };
 
-		table.addRow(rows);
-	    }
-	}
-	catch (Exception e)
-	{
-	    JOptionPane.showMessageDialog(null, e.getMessage());
-	}
+                table.addRow(rows);
+            }
+        }
+        catch (Exception e)
+        {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
     }
 
     void autoGenerateId()
     {
 
-	try
-	{
-	    // select MAX(CAST(id AS Int)) FROM crud
-	    String query = "Select MAX(id) from crud";
-	    st = con.createStatement();
-	    result = st.executeQuery(query);
-	    if (result.next())
-	    {
-		int id = result.getInt(1) + 1;
-		txtId.setText(Integer.toString(id));
-	    }
-	    else
-	    {
-		txtId.setText("1");
-	    }
-	}
-	catch (Exception e)
-	{
-	    JOptionPane.showMessageDialog(null, e.getMessage());
-	}
+        try
+        {
+            // select MAX(CAST(id AS Int)) FROM crud
+            String query = "Select MAX(id) from crud";
+            st = con.createStatement();
+            result = st.executeQuery(query);
+            if (result.next())
+            {
+                int id = result.getInt(1) + 1;
+                txtId.setText(Integer.toString(id));
+            }
+            else
+            {
+                txtId.setText("1");
+            }
+        }
+        catch (Exception e)
+        {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
